@@ -61,19 +61,54 @@ namespace VHRS.Model
             }
         }
 
+        /// <summary>
+        /// Returns the validation error for this <see cref="Runner"/>.
+        /// </summary>
         public String Error
         {
             get
             {
-                throw new NotImplementedException();
+                String nameError = ValidateName();
+                String oddsError = ValidateOdds();
+
+                if(String.IsNullOrEmpty(nameError))
+                {
+                    return oddsError;
+                }
+                else if (String.IsNullOrEmpty(oddsError))
+                {
+                    return nameError;
+                }
+                else
+                {
+                    return $"{nameError}; {oddsError}";
+                }
             }
         }
 
+        /// <summary>
+        /// Returns the validation error for the property with the given <paramref name="columnName"/>.
+        /// </summary>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
         public String this[String columnName]
         {
             get
             {
-                throw new NotImplementedException();
+                if (columnName == null) return String.Empty;
+
+                if(columnName.Equals(nameof(Name)))
+                {
+                    return ValidateName();
+                }
+                else if (columnName.Equals(nameof(Odds)))
+                {
+                    return ValidateOdds();
+                }
+                else
+                {
+                    return String.Empty;
+                }
             }
         }
         #endregion
