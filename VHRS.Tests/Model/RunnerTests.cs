@@ -42,7 +42,7 @@ namespace VHRS.Tests.Model
 
             var error = runner.Error;
 
-            error.Should().BeNull($"because {name} is 18 characters long");
+            error.Should().BeEmpty($"because {name} is 18 characters long");
         }
 
         [Test]
@@ -53,7 +53,7 @@ namespace VHRS.Tests.Model
 
             var error = runner.Error;
 
-            error.Should().BeNull($"because {name} is less than 18 characters long");
+            error.Should().BeEmpty($"because {name} is less than 18 characters long");
         }
     }
 }
