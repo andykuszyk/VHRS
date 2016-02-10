@@ -13,6 +13,17 @@ namespace VHRS.Tests.Model
     public sealed class RunnerTests
     {
         [Test]
+        public void Name_IsInvalid_WhenEmpty()
+        {
+            var name = String.Empty;
+            var runner = new Runner(name, "1/2");
+
+            var error = runner.Error;
+
+            error.Should().NotBeNull($"because {name} is empty");
+        }
+
+        [Test]
         public void Name_IsInvalid_WhenLongerThan18Characters()
         {
             var name = "abcdefghijklmnopqrstuvwxyz";
