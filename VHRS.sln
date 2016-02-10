@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VHRS.Tests", "VHRS.Tests\VH
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{A0CE1532-5519-4218-A59C-C4BFB10F0E35}"
 	ProjectSection(SolutionItems) = preProject
+		Binaries\FluentAssertions.Core.dll = Binaries\FluentAssertions.Core.dll
+		Binaries\FluentAssertions.Core.pdb = Binaries\FluentAssertions.Core.pdb
+		Binaries\FluentAssertions.Core.xml = Binaries\FluentAssertions.Core.xml
+		Binaries\FluentAssertions.dll = Binaries\FluentAssertions.dll
+		Binaries\FluentAssertions.pdb = Binaries\FluentAssertions.pdb
+		Binaries\FluentAssertions.xml = Binaries\FluentAssertions.xml
 		Binaries\nunit.framework.dll = Binaries\nunit.framework.dll
 		Binaries\nunit.framework.xml = Binaries\nunit.framework.xml
 	EndProjectSection
