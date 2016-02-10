@@ -1,4 +1,4 @@
-﻿namespace VHRS
+﻿namespace VHRS.WinForm
 {
     partial class Form1
     {
