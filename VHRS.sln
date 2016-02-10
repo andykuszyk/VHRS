@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VHRS", "VHRS\VHRS.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VHRS.Tests", "VHRS.Tests\VHRS.Tests.csproj", "{4F46F31C-08D7-4260-8D35-6122E915FAB9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{A0CE1532-5519-4218-A59C-C4BFB10F0E35}"
+	ProjectSection(SolutionItems) = preProject
+		Binaries\nunit.framework.dll = Binaries\nunit.framework.dll
+		Binaries\nunit.framework.xml = Binaries\nunit.framework.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
