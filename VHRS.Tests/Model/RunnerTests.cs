@@ -20,7 +20,7 @@ namespace VHRS.Tests.Model
 
             var error = runner.Error;
 
-            error.Should().NotBeNull($"because {name} is empty");
+            error.Should().NotBeEmpty($"because {name} is empty");
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace VHRS.Tests.Model
 
             var error = runner.Error;
 
-            error.Should().NotBeNull($"because {name} is longer than 18 characters");
+            error.Should().NotBeEmpty($"because {name} is longer than 18 characters");
         }
 
         [Test]
@@ -54,6 +54,50 @@ namespace VHRS.Tests.Model
             var error = runner.Error;
 
             error.Should().BeEmpty($"because {name} is less than 18 characters long");
+        }
+
+        [Test]
+        public void Odds_IsValid_WhenInCorrectFormat()
+        {
+            var odds = "1/2";
+            var runner = new Runner("abcde", odds);
+
+            var error = runner.Error;
+
+            error.Should().BeEmpty($"becuase {odds} is a valid odds string");
+        }
+
+        [Test]
+        public void Odds_IsInvalid_WhenContainsLetters()
+        {
+            var odds = "a/2";
+            var runner = new Runner("abcde", odds);
+
+            var error = runner.Error;
+
+            error.Should().NotBeEmpty($"becuase {odds} contains a letter");
+        }
+
+        [Test]
+        public void Odds_IsInvalid_WhenContainsReal()
+        {
+            var odds = "1.5/2";
+            var runner = new Runner("abcde", odds);
+
+            var error = runner.Error;
+
+            error.Should().NotBeEmpty($"because {odds} contains a real number");
+        }
+
+        [Test]
+        public void Odds_IsInvalid_WhenDoesNotContainForwardSlash()
+        {
+            var odds = "12";
+            var runner = new Runner("abcde", odds);
+
+            var error = runner.Error;
+
+            error.Should().NotBeEmpty($"because {odds} does not contain a forward slash");
         }
     }
 }
