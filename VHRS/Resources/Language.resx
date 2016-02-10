@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="InvalidOdds" xml:space="preserve">
+    <value>Please enter fractional odds in the format: 1/2, 10/20, etc.</value>
+  </data>
   <data name="StringContainsNumbers" xml:space="preserve">
     <value>The value you have entered contains numbers and should only contain letters or spaces.</value>
+  </data>
+  <data name="StringIsEmpty" xml:space="preserve">
+    <value>The value you have entered is empty. Please enter a value.</value>
   </data>
   <data name="StringTooLong" xml:space="preserve">
     <value>The value you have entered is too long and should be {0} characters or less.</value>

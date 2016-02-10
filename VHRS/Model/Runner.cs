@@ -80,7 +80,12 @@ namespace VHRS.Model
 
         #region Constructors
 
-
+        /// <summary>
+        /// Instantiates a new <see cref="Runner"/> from the given <paramref name="name"/>
+        /// and <paramref name="odds"/>.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="odds"></param>
         public Runner(String name, String odds)
         {
             _name = name;
@@ -107,17 +112,38 @@ namespace VHRS.Model
         /// <returns></returns>
         private String ValidateName()
         {
-            if(Name == null)
+            if(String.IsNullOrWhiteSpace(Name))
             {
-                return String.Empty;
+                return Language.StringIsEmpty;
             }
             else if (Name.Length > _nameLength)
             {
                 return String.Format(Language.StringTooLong, _nameLength);
             }
-            else if (new Regex(@"\d").IsMatch(Name))
+            else if (Regex.IsMatch(Name,@"\d"))
             {
-                return Language.StringContainsNumbers
+                return Language.StringContainsNumbers;
+            }
+            else
+            {
+                return String.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Returns an error message describing the validation error with the <see cref="Odds"/>
+        /// property, or null if <see cref="Odds"/> is valid.
+        /// </summary>
+        /// <returns></returns>
+        private String ValidateOdds()
+        {
+            if(String.IsNullOrWhiteSpace(Odds))
+            {
+                return Language.StringIsEmpty;
+            }
+            else if (!Regex.IsMatch(Odds,"[0-9]+/[0-9]+"))
+            {
+                return Language.InvalidOdds;
             }
             else
             {

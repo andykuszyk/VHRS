@@ -61,11 +61,29 @@ namespace VHRS.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter fractional odds in the format: 1/2, 10/20, etc..
+        /// </summary>
+        internal static string InvalidOdds {
+            get {
+                return ResourceManager.GetString("InvalidOdds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value you have entered contains numbers and should only contain letters or spaces..
         /// </summary>
         internal static string StringContainsNumbers {
             get {
                 return ResourceManager.GetString("StringContainsNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The value you have entered is empty. Please enter a value..
+        /// </summary>
+        internal static string StringIsEmpty {
+            get {
+                return ResourceManager.GetString("StringIsEmpty", resourceCulture);
             }
         }
         
