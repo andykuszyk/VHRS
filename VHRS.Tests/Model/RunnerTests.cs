@@ -79,9 +79,20 @@ namespace VHRS.Tests.Model
         }
 
         [Test]
-        public void Odds_IsInvalid_WhenContainsReal()
+        public void Odds_IsInvalid_WhenContainsRealAtStart()
         {
             var odds = "1.5/2";
+            var runner = new Runner("abcde", odds);
+
+            var error = runner.Error;
+
+            error.Should().NotBeEmpty($"because {odds} contains a real number");
+        }
+
+        [Test]
+        public void Odds_IsInvalid_WhenContainsRealAtEnd()
+        {
+            var odds = "1/2.5";
             var runner = new Runner("abcde", odds);
 
             var error = runner.Error;

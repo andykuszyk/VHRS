@@ -176,7 +176,7 @@ namespace VHRS.Model
             {
                 return Language.StringIsEmpty;
             }
-            else if (!Regex.IsMatch(Odds,"[0-9]+/[0-9]+"))
+            else if (!Regex.IsMatch(Odds,"^[0-9]+/[0-9]+$"))
             {
                 return Language.InvalidOdds;
             }
