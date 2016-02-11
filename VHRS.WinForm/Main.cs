@@ -7,18 +7,115 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VHRS.Model;
 using VHRS.ViewModel;
+using VHRS.WinForm.Resources;
 
 namespace VHRS.WinForm
 {
     public partial class Main : Form
     {
-        public MainViewModel ViewModel { get; }
+        #region Fields
 
+        private DataGridView runnerGrid;
+        private Button addRunner;
+        private Button removeRunner;
+        private Button runRace;
+
+        #endregion
+
+        #region Properties
+        public MainViewModel ViewModel { get; }
+        #endregion
+
+        #region Constructor
         public Main(MainViewModel viewModel)
         {
             ViewModel = viewModel;
             InitializeComponent();
         }
+        #endregion
+
+        #region Methods
+        private void InitializeComponent()
+        {
+            SuspendLayout();
+
+            // Create controls and add to this form.
+            runnerGrid = CreateRunnersGrid();
+            addRunner = CreateButton(662, 12, "addRunner", "Add Runner");
+            removeRunner = CreateButton(662, 37, "removeRunner", "Remove Runner");
+            runRace = CreateButton(662, 60, "runRace", "Run Race");
+            Controls.AddRange(new Control[] { runnerGrid, addRunner, removeRunner, runRace });
+
+            ClientSize = new System.Drawing.Size(784, 562);
+            Name = "Main";
+            Text = Language.Main_Text;
+
+            ResumeLayout(false);
+        }
+
+        /// <summary>
+        /// Creates a generic button with the given parameters.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="name"></param>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private Button CreateButton(Int32 x, Int32 y, String name, String text)
+        {
+            Button button = new Button();
+            button.Location = new System.Drawing.Point(x, y);
+            button.Name = name;
+            button.Size = new System.Drawing.Size(75, 23);
+            button.TabIndex = 2;
+            button.Text = text;
+            button.UseVisualStyleBackColor = true;
+            return button;
+        }
+
+        /// <summary>
+        /// Creates a generic data grid column with the given parameters.
+        /// </summary>
+        /// <param name="header"></param>
+        /// <param name="name"></param>
+        /// <param name="propertyName">The name of the property on <see cref="Runner"/> that the column should display.</param>
+        /// <returns></returns>
+        private DataGridViewTextBoxColumn CreateDataGridColumn(String header, String name, String propertyName)
+        {
+            DataGridViewTextBoxColumn col = new DataGridViewTextBoxColumn();
+            col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            col.HeaderText = header;
+            col.Name = name;
+            col.DataPropertyName = propertyName;
+            return col;
+        }
+
+        /// <summary>
+        /// Creates the main runners data grid.
+        /// </summary>
+        /// <returns></returns>
+        private DataGridView CreateRunnersGrid()
+        {
+            DataGridView grid = new DataGridView();
+            grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            grid.AutoGenerateColumns = false;
+            grid.DataSource = this.ViewModel.Runners;
+            grid.Columns.Clear();
+            grid.Columns.AddRange(new[]
+            {
+                CreateDataGridColumn(Language.RunnerGrid_Name, "runnerGridNameCol", Runner.NameProperty),
+                CreateDataGridColumn(Language.RunnerGrid_Odds, "runnerGridOddsCol", Runner.OddsProperty),
+            });
+            grid.Location = new System.Drawing.Point(12, 19);
+            grid.Name = "runnerGrid";
+            grid.Size = new System.Drawing.Size(623, 525);
+            grid.TabIndex = 0;
+            grid.AllowUserToAddRows = true;
+            grid.AllowUserToDeleteRows = true;
+            return grid;
+        }
+        #endregion
     }
 }
