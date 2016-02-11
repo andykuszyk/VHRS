@@ -78,12 +78,16 @@ namespace VHRS.WinForm
 
             // Create controls and add to this form.
             _runnerGrid = CreateRunnersGrid();
+            _runnerGrid.SelectionChanged += RunnerGrid_SelectionChanged;
             _addRunner = CreateButton(662, 12, "addRunner", "Add Runner");
             _addRunnerTooltip = CreateToolTip(_addRunner);
+            _addRunner.Click += AddRunner_Click;
             _removeRunner = CreateButton(662, 37, "removeRunner", "Remove Runner");
             _removeRunnerTooltip = CreateToolTip(_removeRunner);
+            _removeRunner.Click += RemoveRunner_Click;
             _runRace = CreateButton(662, 60, "runRace", "Run Race");
             _runRaceTooltip = CreateToolTip(_runRace);
+            _runRace.Click += RunRace_Click;
             Controls.AddRange(new Control[] { _runnerGrid, _addRunner, _removeRunner, _runRace });
 
             ClientSize = new System.Drawing.Size(784, 562);
@@ -91,6 +95,28 @@ namespace VHRS.WinForm
             Text = Language.Main_Text;
 
             ResumeLayout(false);
+        }
+
+        private void RunnerGrid_SelectionChanged(Object sender, EventArgs e)
+        {
+            if (_runnerGrid.CurrentRow == null) return;
+            Runner runner = _runnerGrid.CurrentRow.DataBoundItem as Runner;
+            ViewModel.SelectedRunner = runner;
+        }
+
+        private void RunRace_Click(Object sender, EventArgs e)
+        {
+            ViewModel.RunRace();
+        }
+
+        private void RemoveRunner_Click(Object sender, EventArgs e)
+        {
+            ViewModel.RemoveRunner();
+        }
+
+        private void AddRunner_Click(Object sender, EventArgs e)
+        {
+            ViewModel.AddRunner();
         }
 
         private ToolTip CreateToolTip(Button button)

@@ -97,6 +97,12 @@ namespace VHRS.ViewModel
         public MainViewModel()
         {
             AddRunner();
+            OnPropertyChanged(nameof(CanAddRunner));
+            OnPropertyChanged(nameof(CanRemoveRunner));
+            OnPropertyChanged(nameof(CanRunRace));
+            OnPropertyChanged(nameof(AddRunnerTooltip));
+            OnPropertyChanged(nameof(RemoveRunnerTooltip));
+            OnPropertyChanged(nameof(RunRaceTooltip));
         }
 
         #endregion
@@ -143,11 +149,11 @@ namespace VHRS.ViewModel
                 {
                     Match numeratorMatch = Regex.Match(runner.Odds, numeratorPattern);
                     if (numeratorMatch.Groups.Count == 1) continue;
-                    numerator = Convert.ToInt32(numeratorMatch.Groups[1];
+                    numerator = Convert.ToInt32(numeratorMatch.Groups[1]);
 
                     Match denominatorMatch = Regex.Match(runner.Odds, denominatorPattern);
                     if (denominatorMatch.Groups.Count == 1) continue;
-                    denominator = Convert.ToInt32(denominatorMatch.Groups[1];
+                    denominator = Convert.ToInt32(denominatorMatch.Groups[1]);
                 }
                 catch(InvalidCastException)
                 {
