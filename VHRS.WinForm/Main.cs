@@ -35,8 +35,9 @@ namespace VHRS.WinForm
         public Main(MainViewModel viewModel)
         {
             ViewModel = viewModel;
-            ViewModel.PropertyChanged += ViewModel_PropertyChanged;
             InitializeComponent();
+            ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+            ViewModel.PropertiesChanged();
         }
 
         #endregion

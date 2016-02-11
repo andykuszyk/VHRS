@@ -74,10 +74,9 @@ namespace VHRS.ViewModel
         public MainViewModel()
         {
             AddRunner();
-            OnPropertyChanged(nameof(CanAddRunner));
-            OnPropertyChanged(nameof(CanRemoveRunner));
-            OnPropertyChanged(nameof(CanRunRace));
+            PropertiesChanged();
         }
+
 
         #endregion
 
@@ -91,6 +90,16 @@ namespace VHRS.ViewModel
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Fires the property changed notifications on the properties.
+        /// </summary>
+        public void PropertiesChanged()
+        {
+            OnPropertyChanged(nameof(CanAddRunner));
+            OnPropertyChanged(nameof(CanRemoveRunner));
+            OnPropertyChanged(nameof(CanRunRace));
+        }
 
         /// <summary>
         /// Called when a property changes on one of the <see cref="Runners"/>.
