@@ -31,10 +31,12 @@ namespace VHRS.Model
         /// </summary>
         private const Int32 _nameLength = 18;
 
+
         #endregion
 
         #region Properties
         
+        public static readonly String NameProperty = "Name";
         /// <summary>
         /// The name of this runner.
         /// </summary>
@@ -46,8 +48,9 @@ namespace VHRS.Model
                 _name = value;
                 PropertyChanged(this, new PropertyChangedEventArgs(nameof(Name)));
             }
-        } 
+        }
 
+        public static readonly String OddsProperty = "Odds";
         /// <summary>
         /// The fractional odds price represented as a string fraction, e.g. 1/2.
         /// </summary>
