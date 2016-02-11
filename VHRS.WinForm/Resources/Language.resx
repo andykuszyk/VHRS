@@ -120,6 +120,9 @@
   <data name="Main_Text" xml:space="preserve">
     <value>Virtual Horse Race Simulator</value>
   </data>
+  <data name="RaceWinner" xml:space="preserve">
+    <value>The winner of the race is: {0}.</value>
+  </data>
   <data name="RunnerGrid_Name" xml:space="preserve">
     <value>Name</value>
   </data>

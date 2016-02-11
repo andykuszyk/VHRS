@@ -70,6 +70,15 @@ namespace VHRS.WinForm.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The winner of the race is: {0}..
+        /// </summary>
+        internal static string RaceWinner {
+            get {
+                return ResourceManager.GetString("RaceWinner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string RunnerGrid_Name {

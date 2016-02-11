@@ -106,7 +106,9 @@ namespace VHRS.WinForm
 
         private void RunRace_Click(Object sender, EventArgs e)
         {
-            ViewModel.RunRace();
+            Runner winner = ViewModel.RunRace();
+            if (winner == null) return;
+            MessageBox.Show(String.Format(Language.RaceWinner,winner));
         }
 
         private void RemoveRunner_Click(Object sender, EventArgs e)
