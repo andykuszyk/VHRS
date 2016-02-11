@@ -14,8 +14,7 @@ namespace VHRS.ViewModel
 
         public MainViewModel()
         {
-            Runners.Add(new Runner("ANdy", "1/2"));
-            Runners.Add(new Runner("ANdy123", "1a/2"));
+            Runners.Add(new Runner("", ""));
         }
     }
 }
