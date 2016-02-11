@@ -86,5 +86,14 @@ namespace VHRS.WinForm.Resources {
                 return ResourceManager.GetString("RunnerGrid_Odds", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Runners.
+        /// </summary>
+        internal static string RunnersGroup_Text {
+            get {
+                return ResourceManager.GetString("RunnersGroup_Text", resourceCulture);
+            }
+        }
     }
 }

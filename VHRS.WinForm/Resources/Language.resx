@@ -126,4 +126,7 @@
   <data name="RunnerGrid_Odds" xml:space="preserve">
     <value>Fractional Odds</value>
   </data>
+  <data name="RunnersGroup_Text" xml:space="preserve">
+    <value>Runners</value>
+  </data>
 </root>
