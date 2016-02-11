@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using VHRS.Model;
 using VHRS.Resources;
@@ -46,8 +47,13 @@ namespace VHRS.ViewModel
             {
                 _selectedRunner = value;
                 _canRemoveRunner = value != null;
+                _removeRunnerTooltip =
+                    _canRemoveRunner ?
+                    String.Empty :
+                    Language.RemoveRunnerDisabled_NoRunnerSelected;
                 OnPropertyChanged(nameof(SelectedRunner));
                 OnPropertyChanged(nameof(CanRemoveRunner));
+                OnPropertyChanged(nameof(RemoveRunnerTooltip));
             }
         }
 
@@ -60,6 +66,26 @@ namespace VHRS.ViewModel
         /// Returns true if additional <see cref="Runner"/>s can be added to <see cref="Runners"/>.
         /// </summary>
         public Boolean CanAddRunner { get { return _canAddRunner; } }
+
+        /// <summary>
+        /// Returns true if the race can be run.
+        /// </summary>
+        public Boolean CanRunRace { get { return _canRunRace; } }
+
+        /// <summary>
+        /// The reason why add runner may be disabled.
+        /// </summary>
+        public String AddRunnerTooltip { get { return _addRunnerTooltip; } }
+
+        /// <summary>
+        /// The reason why remove runner may be disabled.
+        /// </summary>
+        public String RemoveRunnerTooltip { get { return _removeRunnerTooltip; } }
+
+        /// <summary>
+        /// The reason why run race may be disabled.
+        /// </summary>
+        public String RunRaceTooltip { get { return _runRaceTooltip; } }
 
         #endregion
 
@@ -86,9 +112,77 @@ namespace VHRS.ViewModel
 
         #region Methods
 
+        /// <summary>
+        /// Called when a property changes on one of the <see cref="Runners"/>.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Runner_PropertyChanged(Object sender, PropertyChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            if(e.PropertyName.Equals(Runner.OddsProperty))
+            {
+                ReCalculateRaceMargin();
+            }
+        }
+
+        /// <summary>
+        /// Calculates the race margin for the <see cref="Runners"/>.
+        /// </summary>
+        private void ReCalculateRaceMargin()
+        {
+            Single raceMargin = 0f;
+            String numeratorPattern = "^([0-9]+)/";
+            String denominatorPattern = "/([0-9]+)";
+            foreach (Runner runner in Runners)
+            {
+                if (!Regex.IsMatch(runner.Odds, numeratorPattern) || !Regex.IsMatch(runner.Odds, denominatorPattern)) continue;
+
+                Int32 numerator;
+                Int32 denominator;
+                try
+                {
+                    Match numeratorMatch = Regex.Match(runner.Odds, numeratorPattern);
+                    if (numeratorMatch.Groups.Count == 1) continue;
+                    numerator = Convert.ToInt32(numeratorMatch.Groups[1];
+
+                    Match denominatorMatch = Regex.Match(runner.Odds, denominatorPattern);
+                    if (denominatorMatch.Groups.Count == 1) continue;
+                    denominator = Convert.ToInt32(denominatorMatch.Groups[1];
+                }
+                catch(InvalidCastException)
+                {
+                    continue;
+                }
+                catch(FormatException)
+                {
+                    continue;
+                }
+
+                raceMargin += 100 / ((numerator / denominator) + 1);
+            }
+
+            _raceMargin = Convert.ToSingle(Math.Round(raceMargin, 2));
+            EvaluateCanRunRace();
+        }
+
+        private void EvaluateCanRunRace()
+        {
+            _canRunRace = true;
+            _runRaceTooltip = String.Empty;
+
+            if(Runners.Count < 4 || Runners.Count > 16)
+            {
+                _canRunRace = false;
+                _runRaceTooltip = Language.RunRaceDisabled_WrongNumberOfRunners;
+            }
+            else if (_raceMargin < 1.1f || _raceMargin > 1.4f)
+            {
+                _canRunRace = false;
+                _runRaceTooltip = Language.RunRaceDisabled_WrongRaceMargin;
+            }
+
+            OnPropertyChanged(nameof(CanRunRace));
+            OnPropertyChanged(nameof(RunRaceTooltip));
         }
 
         /// <summary>
@@ -111,8 +205,14 @@ namespace VHRS.ViewModel
             runner.PropertyChanged += Runner_PropertyChanged;
             Runners.Add(runner);
 
-            _canAddRunner = Runners.Count < _maxRunnerCount)
+            ReCalculateRaceMargin();
+            _canAddRunner = Runners.Count < _maxRunnerCount;
+            _addRunnerTooltip =
+                _canAddRunner ?
+                String.Empty :
+                String.Format(Language.AddRunnerDisabled_TooManyRunners, _maxRunnerCount);
             OnPropertyChanged(nameof(CanAddRunner));
+            OnPropertyChanged(nameof(AddRunnerTooltip));
         }
 
 
@@ -124,6 +224,7 @@ namespace VHRS.ViewModel
             if (!_canRemoveRunner || SelectedRunner == null || !Runners.Contains(SelectedRunner)) return;
             Runners.Remove(SelectedRunner);
             SelectedRunner.PropertyChanged -= Runner_PropertyChanged;
+            ReCalculateRaceMargin();
         }
 
         /// <summary>
@@ -140,10 +241,7 @@ namespace VHRS.ViewModel
         {
             foreach (Runner runner in Runners)
             {
-                if(runner.PropertyChanged != null)
-                {
-                    runner.PropertyChanged -= Runner_PropertyChanged;
-                }
+                runner.PropertyChanged -= Runner_PropertyChanged;
             }
         }
 
