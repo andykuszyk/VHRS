@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VHRS.ViewModel;
 
 namespace VHRS.WinForm
 {
@@ -16,7 +17,7 @@ namespace VHRS.WinForm
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+            Application.Run(new Main(new MainViewModel()));
         }
     }
 }

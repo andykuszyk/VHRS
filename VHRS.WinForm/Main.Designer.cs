@@ -48,6 +48,8 @@ namespace VHRS.WinForm
             this._runnerGrid.Name = "_runnerGrid";
             this._runnerGrid.Size = new System.Drawing.Size(623, 525);
             this._runnerGrid.TabIndex = 0;
+            this._runnerGrid.DataSource = ViewModel.Runners;
+            //this._runnerGrid.Bin
             // 
             // runnersGroup
             // 
