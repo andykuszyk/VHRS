@@ -57,18 +57,6 @@ namespace VHRS.WinForm
                 case nameof(ViewModel.CanRunRace):
                     _runRace.Enabled = ViewModel.CanRunRace;
                     break;
-
-                case nameof(ViewModel.AddRunnerTooltip):
-                    _addRunnerTooltip.SetToolTip(_addRunner, ViewModel.AddRunnerTooltip);
-                    break;
-
-                case nameof(ViewModel.RemoveRunnerTooltip):
-                    _removeRunnerTooltip.SetToolTip(_removeRunner, ViewModel.RemoveRunnerTooltip);
-                    break;
-
-                case nameof(ViewModel.RunRaceTooltip):
-                    _runRaceTooltip.SetToolTip(_runRace, ViewModel.RunRaceTooltip);
-                    break;
             }
         }
 

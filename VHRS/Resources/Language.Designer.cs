@@ -61,15 +61,6 @@ namespace VHRS.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No more than {0} runners can compete in the race..
-        /// </summary>
-        internal static string AddRunnerDisabled_TooManyRunners {
-            get {
-                return ResourceManager.GetString("AddRunnerDisabled_TooManyRunners", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to New Runner {0}.
         /// </summary>
         internal static string DefaultRunnerName {
@@ -93,33 +84,6 @@ namespace VHRS.Resources {
         internal static string InvalidOdds {
             get {
                 return ResourceManager.GetString("InvalidOdds", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please select a runner to remove it..
-        /// </summary>
-        internal static string RemoveRunnerDisabled_NoRunnerSelected {
-            get {
-                return ResourceManager.GetString("RemoveRunnerDisabled_NoRunnerSelected", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There must be between 4 and 16 runners to run the race..
-        /// </summary>
-        internal static string RunRaceDisabled_WrongNumberOfRunners {
-            get {
-                return ResourceManager.GetString("RunRaceDisabled_WrongNumberOfRunners", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The race margin must be between 110% and 140% to run the race..
-        /// </summary>
-        internal static string RunRaceDisabled_WrongRaceMargin {
-            get {
-                return ResourceManager.GetString("RunRaceDisabled_WrongRaceMargin", resourceCulture);
             }
         }
         

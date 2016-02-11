@@ -18,9 +18,6 @@ namespace VHRS.ViewModel
         private Boolean _canRemoveRunner = false;
         private Boolean _canRunRace = false;
         private Runner _selectedRunner = null;
-        private String _addRunnerTooltip = String.Empty;
-        private String _removeRunnerTooltip = String.Empty;
-        private String _runRaceTooltip = String.Empty;
         private Single _raceMargin = 0f;
 
         /// <summary>
@@ -47,13 +44,8 @@ namespace VHRS.ViewModel
             {
                 _selectedRunner = value;
                 _canRemoveRunner = value != null;
-                _removeRunnerTooltip =
-                    _canRemoveRunner ?
-                    String.Empty :
-                    Language.RemoveRunnerDisabled_NoRunnerSelected;
                 OnPropertyChanged(nameof(SelectedRunner));
                 OnPropertyChanged(nameof(CanRemoveRunner));
-                OnPropertyChanged(nameof(RemoveRunnerTooltip));
             }
         }
 
@@ -72,21 +64,6 @@ namespace VHRS.ViewModel
         /// </summary>
         public Boolean CanRunRace { get { return _canRunRace; } }
 
-        /// <summary>
-        /// The reason why add runner may be disabled.
-        /// </summary>
-        public String AddRunnerTooltip { get { return _addRunnerTooltip; } }
-
-        /// <summary>
-        /// The reason why remove runner may be disabled.
-        /// </summary>
-        public String RemoveRunnerTooltip { get { return _removeRunnerTooltip; } }
-
-        /// <summary>
-        /// The reason why run race may be disabled.
-        /// </summary>
-        public String RunRaceTooltip { get { return _runRaceTooltip; } }
-
         #endregion
 
         #region Constructors
@@ -100,9 +77,6 @@ namespace VHRS.ViewModel
             OnPropertyChanged(nameof(CanAddRunner));
             OnPropertyChanged(nameof(CanRemoveRunner));
             OnPropertyChanged(nameof(CanRunRace));
-            OnPropertyChanged(nameof(AddRunnerTooltip));
-            OnPropertyChanged(nameof(RemoveRunnerTooltip));
-            OnPropertyChanged(nameof(RunRaceTooltip));
         }
 
         #endregion
@@ -174,21 +148,17 @@ namespace VHRS.ViewModel
         private void EvaluateCanRunRace()
         {
             _canRunRace = true;
-            _runRaceTooltip = String.Empty;
 
             if(Runners.Count < 4 || Runners.Count > 16)
             {
                 _canRunRace = false;
-                _runRaceTooltip = Language.RunRaceDisabled_WrongNumberOfRunners;
             }
             else if (_raceMargin < 1.1f || _raceMargin > 1.4f)
             {
                 _canRunRace = false;
-                _runRaceTooltip = Language.RunRaceDisabled_WrongRaceMargin;
             }
 
             OnPropertyChanged(nameof(CanRunRace));
-            OnPropertyChanged(nameof(RunRaceTooltip));
         }
 
         /// <summary>
@@ -213,12 +183,7 @@ namespace VHRS.ViewModel
 
             ReCalculateRaceMargin();
             _canAddRunner = Runners.Count < _maxRunnerCount;
-            _addRunnerTooltip =
-                _canAddRunner ?
-                String.Empty :
-                String.Format(Language.AddRunnerDisabled_TooManyRunners, _maxRunnerCount);
             OnPropertyChanged(nameof(CanAddRunner));
-            OnPropertyChanged(nameof(AddRunnerTooltip));
         }
 
 

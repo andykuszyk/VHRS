@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddRunnerDisabled_TooManyRunners" xml:space="preserve">
-    <value>No more than {0} runners can compete in the race.</value>
-  </data>
   <data name="DefaultRunnerName" xml:space="preserve">
     <value>New Runner {0}</value>
   </data>
@@ -128,15 +125,6 @@
   </data>
   <data name="InvalidOdds" xml:space="preserve">
     <value>Please enter fractional odds in the format: 1/2, 10/20, etc.</value>
-  </data>
-  <data name="RemoveRunnerDisabled_NoRunnerSelected" xml:space="preserve">
-    <value>Please select a runner to remove it.</value>
-  </data>
-  <data name="RunRaceDisabled_WrongNumberOfRunners" xml:space="preserve">
-    <value>There must be between 4 and 16 runners to run the race.</value>
-  </data>
-  <data name="RunRaceDisabled_WrongRaceMargin" xml:space="preserve">
-    <value>The race margin must be between 110% and 140% to run the race.</value>
   </data>
   <data name="StringContainsNumbers" xml:space="preserve">
     <value>The value you have entered contains numbers and should only contain letters or spaces.</value>
