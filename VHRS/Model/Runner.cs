@@ -46,7 +46,7 @@ namespace VHRS.Model
             set
             {
                 _name = value;
-                PropertyChanged(this, new PropertyChangedEventArgs(nameof(Name)));
+                OnPropertyChanged(nameof(Name));
             }
         }
 
@@ -60,7 +60,7 @@ namespace VHRS.Model
             set
             {
                 _odds = value;
-                PropertyChanged(this, new PropertyChangedEventArgs(nameof(Odds)));
+                OnPropertyChanged(nameof(Odds));
             }
         }
 
@@ -187,6 +187,16 @@ namespace VHRS.Model
             {
                 return String.Empty;
             }
+        }
+
+        /// <summary>
+        /// Fires the property changed event, if it has a subscriber.
+        /// </summary>
+        /// <param name="propertyName"></param>
+        private void OnPropertyChanged(String propertyName)
+        {
+            if (PropertyChanged == null) return;
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion
