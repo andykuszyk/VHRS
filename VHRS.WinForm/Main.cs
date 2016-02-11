@@ -116,6 +116,15 @@ namespace VHRS.WinForm
             grid.AllowUserToDeleteRows = true;
             return grid;
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (ViewModel != null))
+            {
+                ViewModel.Dispose();
+            }
+            base.Dispose(disposing);
+        }
         #endregion
     }
 }

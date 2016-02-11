@@ -9,7 +9,7 @@ using VHRS.Resources;
 
 namespace VHRS.ViewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged, IDisposable
     {
         #region Fields
 
@@ -20,6 +20,7 @@ namespace VHRS.ViewModel
         private String _addRunnerTooltip = String.Empty;
         private String _removeRunnerTooltip = String.Empty;
         private String _runRaceTooltip = String.Empty;
+        private Single _raceMargin = 0f;
 
         /// <summary>
         /// The maximum number of runners that can be added to <see cref="Runners"/>.
@@ -85,6 +86,11 @@ namespace VHRS.ViewModel
 
         #region Methods
 
+        private void Runner_PropertyChanged(Object sender, PropertyChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Calculates the winning <see cref="Runner"/>.
         /// </summary>
@@ -101,11 +107,14 @@ namespace VHRS.ViewModel
         public void AddRunner()
         {
             if (!_canAddRunner) return;
-            Runners.Add(new Runner(String.Format(Language.DefaultRunnerName, Runners.Count + 1), Language.DefaultRunnerOdds));
+            Runner runner = new Runner(String.Format(Language.DefaultRunnerName, Runners.Count + 1), Language.DefaultRunnerOdds);
+            runner.PropertyChanged += Runner_PropertyChanged;
+            Runners.Add(runner);
 
             _canAddRunner = Runners.Count < _maxRunnerCount)
             OnPropertyChanged(nameof(CanAddRunner));
         }
+
 
         /// <summary>
         /// Removes <see cref="SelectedRunner"/> from <see cref="Runners"/>.
@@ -114,6 +123,7 @@ namespace VHRS.ViewModel
         {
             if (!_canRemoveRunner || SelectedRunner == null || !Runners.Contains(SelectedRunner)) return;
             Runners.Remove(SelectedRunner);
+            SelectedRunner.PropertyChanged -= Runner_PropertyChanged;
         }
 
         /// <summary>
@@ -124,6 +134,17 @@ namespace VHRS.ViewModel
         {
             if (PropertyChanged == null) return;
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void Dispose()
+        {
+            foreach (Runner runner in Runners)
+            {
+                if(runner.PropertyChanged != null)
+                {
+                    runner.PropertyChanged -= Runner_PropertyChanged;
+                }
+            }
         }
 
         #endregion
