@@ -61,6 +61,24 @@ namespace VHRS.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Runner {0}.
+        /// </summary>
+        internal static string DefaultRunnerName {
+            get {
+                return ResourceManager.GetString("DefaultRunnerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1/1.
+        /// </summary>
+        internal static string DefaultRunnerOdds {
+            get {
+                return ResourceManager.GetString("DefaultRunnerOdds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter fractional odds in the format: 1/2, 10/20, etc..
         /// </summary>
         internal static string InvalidOdds {

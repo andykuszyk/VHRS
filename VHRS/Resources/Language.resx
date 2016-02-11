@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DefaultRunnerName" xml:space="preserve">
+    <value>New Runner {0}</value>
+  </data>
+  <data name="DefaultRunnerOdds" xml:space="preserve">
+    <value>1/1</value>
+  </data>
   <data name="InvalidOdds" xml:space="preserve">
     <value>Please enter fractional odds in the format: 1/2, 10/20, etc.</value>
   </data>

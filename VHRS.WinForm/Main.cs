@@ -17,10 +17,10 @@ namespace VHRS.WinForm
     {
         #region Fields
 
-        private DataGridView runnerGrid;
-        private Button addRunner;
-        private Button removeRunner;
-        private Button runRace;
+        private DataGridView _runnerGrid;
+        private Button _addRunner;
+        private Button _removeRunner;
+        private Button _runRace;
 
         #endregion
 
@@ -42,11 +42,11 @@ namespace VHRS.WinForm
             SuspendLayout();
 
             // Create controls and add to this form.
-            runnerGrid = CreateRunnersGrid();
-            addRunner = CreateButton(662, 12, "addRunner", "Add Runner");
-            removeRunner = CreateButton(662, 37, "removeRunner", "Remove Runner");
-            runRace = CreateButton(662, 60, "runRace", "Run Race");
-            Controls.AddRange(new Control[] { runnerGrid, addRunner, removeRunner, runRace });
+            _runnerGrid = CreateRunnersGrid();
+            _addRunner = CreateButton(662, 12, "addRunner", "Add Runner");
+            _removeRunner = CreateButton(662, 37, "removeRunner", "Remove Runner");
+            _runRace = CreateButton(662, 60, "runRace", "Run Race");
+            Controls.AddRange(new Control[] { _runnerGrid, _addRunner, _removeRunner, _runRace });
 
             ClientSize = new System.Drawing.Size(784, 562);
             Name = "Main";
