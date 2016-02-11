@@ -61,6 +61,15 @@ namespace VHRS.WinForm.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Runner.
+        /// </summary>
+        internal static string AddRunner {
+            get {
+                return ResourceManager.GetString("AddRunner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual Horse Race Simulator.
         /// </summary>
         internal static string Main_Text {
@@ -75,6 +84,15 @@ namespace VHRS.WinForm.Resources {
         internal static string RaceWinner {
             get {
                 return ResourceManager.GetString("RaceWinner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Runner.
+        /// </summary>
+        internal static string RemoveRunner {
+            get {
+                return ResourceManager.GetString("RemoveRunner", resourceCulture);
             }
         }
         
@@ -97,11 +115,11 @@ namespace VHRS.WinForm.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Runners.
+        ///   Looks up a localized string similar to Run Race.
         /// </summary>
-        internal static string RunnersGroup_Text {
+        internal static string RunRace {
             get {
-                return ResourceManager.GetString("RunnersGroup_Text", resourceCulture);
+                return ResourceManager.GetString("RunRace", resourceCulture);
             }
         }
     }

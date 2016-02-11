@@ -67,13 +67,13 @@ namespace VHRS.WinForm
             // Create controls and add to this form.
             _runnerGrid = CreateRunnersGrid();
             _runnerGrid.SelectionChanged += RunnerGrid_SelectionChanged;
-            _addRunner = CreateButton(662, 12, "addRunner", "Add Runner");
+            _addRunner = CreateButton(662, 12, "addRunner", Language.AddRunner);
             _addRunnerTooltip = CreateToolTip(_addRunner);
             _addRunner.Click += AddRunner_Click;
-            _removeRunner = CreateButton(662, 37, "removeRunner", "Remove Runner");
+            _removeRunner = CreateButton(662, 37, "removeRunner", Language.RemoveRunner);
             _removeRunnerTooltip = CreateToolTip(_removeRunner);
             _removeRunner.Click += RemoveRunner_Click;
-            _runRace = CreateButton(662, 60, "runRace", "Run Race");
+            _runRace = CreateButton(662, 60, "runRace", Language.RunRace);
             _runRaceTooltip = CreateToolTip(_runRace);
             _runRace.Click += RunRace_Click;
             Controls.AddRange(new Control[] { _runnerGrid, _addRunner, _removeRunner, _runRace });

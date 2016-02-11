@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddRunner" xml:space="preserve">
+    <value>Add Runner</value>
+  </data>
   <data name="Main_Text" xml:space="preserve">
     <value>Virtual Horse Race Simulator</value>
   </data>
   <data name="RaceWinner" xml:space="preserve">
     <value>The winner of the race is: {0}.</value>
+  </data>
+  <data name="RemoveRunner" xml:space="preserve">
+    <value>Remove Runner</value>
   </data>
   <data name="RunnerGrid_Name" xml:space="preserve">
     <value>Name</value>
@@ -129,7 +135,7 @@
   <data name="RunnerGrid_Odds" xml:space="preserve">
     <value>Fractional Odds</value>
   </data>
-  <data name="RunnersGroup_Text" xml:space="preserve">
-    <value>Runners</value>
+  <data name="RunRace" xml:space="preserve">
+    <value>Run Race</value>
   </data>
 </root>
