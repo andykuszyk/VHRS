@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using VHRS.WinForm.Resources;
 
 namespace VHRS.WinForm
 {
@@ -16,9 +15,6 @@ namespace VHRS.WinForm
         public Main()
         {
             InitializeComponent();
-            this.Text = Language.Main_Text;
-            this.Width = 800;
-            this.Height = 600;
 
         }
     }

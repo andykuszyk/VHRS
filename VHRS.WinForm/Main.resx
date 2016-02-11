@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Main_Text" xml:space="preserve">
-    <value>Virtual Horse Race Simulator</value>
-  </data>
-  <data name="RunnerGrid_Name" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="RunnerGrid_Odds" xml:space="preserve">
-    <value>Fractional Odds</value>
-  </data>
+  <metadata name="Name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Odds.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

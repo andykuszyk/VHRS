@@ -68,5 +68,23 @@ namespace VHRS.WinForm.Resources {
                 return ResourceManager.GetString("Main_Text", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string RunnerGrid_Name {
+            get {
+                return ResourceManager.GetString("RunnerGrid_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fractional Odds.
+        /// </summary>
+        internal static string RunnerGrid_Odds {
+            get {
+                return ResourceManager.GetString("RunnerGrid_Odds", resourceCulture);
+            }
+        }
     }
 }
