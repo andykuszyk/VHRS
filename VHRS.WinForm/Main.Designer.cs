@@ -5,10 +5,20 @@ namespace VHRS.WinForm
 {
     partial class Main
     {
+        #region Fields
         /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+
+        private System.Windows.Forms.DataGridView runnerGrid;
+        private System.Windows.Forms.GroupBox runnersGroup;
+        private System.Windows.Forms.DataGridViewTextBoxColumn runnerGridOddsCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn runnerGridNameCol;
+        private System.Windows.Forms.Button addRunner; 
+        private System.Windows.Forms.Button removeRunner;
+        private System.Windows.Forms.Button runRace;
+        #endregion
 
         /// <summary>
         /// Clean up any resources being used.
@@ -35,6 +45,9 @@ namespace VHRS.WinForm
             this.runnersGroup = new System.Windows.Forms.GroupBox();
             this.runnerGridNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.runnerGridOddsCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addRunner = new System.Windows.Forms.Button();
+            this.removeRunner = new System.Windows.Forms.Button();
+            this.runRace = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.runnerGrid)).BeginInit();
             this.runnersGroup.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +65,8 @@ namespace VHRS.WinForm
             this.runnerGrid.Name = "runnerGrid";
             this.runnerGrid.Size = new System.Drawing.Size(623, 525);
             this.runnerGrid.TabIndex = 0;
+            this.runnerGrid.AllowUserToAddRows = true;
+            this.runnerGrid.AllowUserToDeleteRows = true;
             // 
             // runnersGroup
             // 
@@ -77,10 +92,38 @@ namespace VHRS.WinForm
             this.runnerGridOddsCol.Name = "runnerGridOddsCol";
             this.runnerGridOddsCol.DataPropertyName = Runner.OddsProperty;
             // 
+            // Add runner
+            // 
+            this.addRunner.Location = new System.Drawing.Point(662, 12);
+            this.addRunner.Name = "addRunner";
+            this.addRunner.Size = new System.Drawing.Size(75, 23);
+            this.addRunner.TabIndex = 2;
+            this.addRunner.Text = "Add Runner";
+            this.addRunner.UseVisualStyleBackColor = true;
+            // 
+            // Remove runner
+            // 
+            this.removeRunner.Location = new System.Drawing.Point(662, 37);
+            this.removeRunner.Name = "removeRunner";
+            this.removeRunner.Size = new System.Drawing.Size(75, 23);
+            this.removeRunner.TabIndex = 2;
+            this.removeRunner.Text = "Remove Runner";
+            this.removeRunner.UseVisualStyleBackColor = true;
+            // 
+            // Run race
+            // 
+            this.runRace.Location = new System.Drawing.Point(662, 60);
+            this.runRace.Name = "runRace";
+            this.runRace.Size = new System.Drawing.Size(75, 23);
+            this.runRace.TabIndex = 2;
+            this.runRace.Text = "Run Race";
+            this.runRace.UseVisualStyleBackColor = true;
+            // 
             // Main
             // 
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.runnersGroup);
+            this.Controls.AddRange(new[] { addRunner, removeRunner, runRace });
             this.Name = "Main";
             this.Text = Language.Main_Text;
             ((System.ComponentModel.ISupportInitialize)(this.runnerGrid)).EndInit();
@@ -91,10 +134,7 @@ namespace VHRS.WinForm
 
         #endregion
 
-        private System.Windows.Forms.DataGridView runnerGrid;
-        private System.Windows.Forms.GroupBox runnersGroup;
-        private System.Windows.Forms.DataGridViewTextBoxColumn runnerGridOddsCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn runnerGridNameCol;
+        
     }
 }
 
