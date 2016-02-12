@@ -245,6 +245,8 @@ namespace VHRS.ViewModel
             Runners.Remove(SelectedRunner);
             SelectedRunner.PropertyChanged -= Runner_PropertyChanged;
             ReCalculateRaceMargin();
+            _canAddRunner = Runners.Count < _maxRunnerCount;
+            OnPropertyChanged(nameof(CanAddRunner));
         }
 
         /// <summary>
