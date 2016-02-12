@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -18,7 +19,27 @@ namespace VHRS.ViewModel
         private Boolean _canRemoveRunner = false;
         private Boolean _canRunRace = false;
         private Runner _selectedRunner = null;
-        private Single _raceMargin = 0f;
+        private Decimal _raceMargin = 0;
+
+        /// <summary>
+        /// The minimum margin, below which races cannot be run.
+        /// </summary>
+        private const Decimal _minRaceMargin = 1.1M;
+
+        /// <summary>
+        /// The maximum margin, above which races cannot be run.
+        /// </summary>
+        private const Decimal _maxRaceMargin = 1.4M;
+
+        /// <summary>
+        /// The margin by which chances can vary in <see cref="RunRace"/>.
+        /// </summary>
+        private const Decimal _randomMargin = 0.02M;
+
+        /// <summary>
+        /// Used for calculating random variations in <see cref="RunRace"/>.
+        /// </summary>
+        private Random _random = new Random();
 
         /// <summary>
         /// The maximum number of runners that can be added to <see cref="Runners"/>.
@@ -119,7 +140,7 @@ namespace VHRS.ViewModel
         /// </summary>
         private void ReCalculateRaceMargin()
         {
-            _raceMargin = Convert.ToSingle(Math.Round(Runners.Sum(r => r.GetMargin()), 2));
+            _raceMargin = Math.Round(Runners.Sum(r => r.GetMargin()), 2);
             EvaluateCanRunRace();
         }
 
@@ -131,7 +152,7 @@ namespace VHRS.ViewModel
             {
                 _canRunRace = false;
             }
-            else if (_raceMargin < 1.1f || _raceMargin > 1.4f)
+            else if (_raceMargin < _minRaceMargin || _raceMargin > _maxRaceMargin)
             {
                 _canRunRace = false;
             }
@@ -145,8 +166,48 @@ namespace VHRS.ViewModel
         /// <returns></returns>
         public Runner RunRace()
         {
-            if (!_canRunRace) return null;
-            throw new NotImplementedException();
+            if (!_canRunRace || _raceMargin == 0) return null;
+
+            // Calculate the chances of each of the runners winning, based on their margin.
+            var runnersAndChances = Runners.Select(r => new { Runner = r, Chances = r.GetMargin() / _raceMargin });
+
+            // Now, randomize the runners' chances using a randomization margin.
+            var runnersAndRanomizedChances = runnersAndChances.Select(r => new { Runner = r.Runner, Chances = r.Chances + (Convert.ToDecimal(_random.NextDouble() * 2 - 1) * _randomMargin) });
+
+            // Re-normalize the chances so that they stack up to 100%.
+            Decimal totalRandomizedChances = runnersAndRanomizedChances.Sum(r => r.Chances);
+            var runnersAndNormalizedRandomizedChances = runnersAndRanomizedChances.Select(r => new { Runner = r.Runner, Chances = r.Chances / totalRandomizedChances });
+
+            // Calculate a random outcome for the race.
+            Decimal raceOutcome = Convert.ToDecimal(_random.NextDouble());
+
+            // Now, iterate over the runners to see if their chances of winning covers the random race outcome.
+            Decimal cumulativeChances = 0M;
+            foreach(var runnerChances in runnersAndNormalizedRandomizedChances.OrderBy(r => r.Chances))
+            {
+                Decimal runnerMinChance = cumulativeChances;
+                Decimal runnerMaxChance = cumulativeChances + runnerChances.Chances;
+
+
+                if (raceOutcome > runnerMinChance && raceOutcome <= runnerMaxChance)
+                {
+                    // If the runners chances covers the outcome, we have a winner.
+                    // Note that this case covers 1.
+                    return runnerChances.Runner;
+                }
+                else if(cumulativeChances == 0 && raceOutcome == 0)
+                {
+                    // If the race outcome was zero and this is the first runner, then this one wins.
+                    return runnerChances.Runner;
+                }
+
+                // If we didn't find a winner, increase the cumulative chances and continue.
+                cumulativeChances += runnerChances.Chances;
+            }
+
+            // A winner should always be found, so this point should never be reached.
+            Debug.Fail($"A winner should always be found by {nameof(RunRace)}");
+            return null;
         }
 
         /// <summary>

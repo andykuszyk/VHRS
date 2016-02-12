@@ -147,7 +147,7 @@ namespace VHRS.Model
         /// Calculates the race margin for this <see cref="Runner"/>.
         /// </summary>
         /// <returns></returns>
-        public Single GetMargin()
+        public Decimal GetMargin()
         {
             String numeratorPattern = "^([0-9]+)/";
             String denominatorPattern = "/([0-9]+)";
