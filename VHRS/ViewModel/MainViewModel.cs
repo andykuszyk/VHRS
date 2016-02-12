@@ -125,6 +125,7 @@ namespace VHRS.ViewModel
             OnPropertyChanged(nameof(CanAddRunner));
             OnPropertyChanged(nameof(CanRemoveRunner));
             OnPropertyChanged(nameof(CanRunRace));
+            OnPropertyChanged(nameof(RaceMargin));
         }
 
         /// <summary>
@@ -178,7 +179,7 @@ namespace VHRS.ViewModel
             var runnersAndChances = Runners.Select(r => new { Runner = r, Chances = r.GetMargin() / _raceMargin });
 
             // Now, randomize the runners' chances using a randomization margin.
-            var runnersAndRanomizedChances = runnersAndChances.Select(r => new { Runner = r.Runner, Chances = r.Chances + (Convert.ToDecimal(_random.NextDouble() * 2 - 1) * _randomMargin) });
+            var runnersAndRanomizedChances = runnersAndChances.Select(r => new { Runner = r.Runner, Chances = r.Chances + Convert.ToDecimal(_random.NextDouble() * 2 - 1) * _randomMargin });
 
             // Re-normalize the chances so that they stack up to 100%.
             Decimal totalRandomizedChances = runnersAndRanomizedChances.Sum(r => r.Chances);
@@ -188,7 +189,7 @@ namespace VHRS.ViewModel
             Decimal raceOutcome = Convert.ToDecimal(_random.NextDouble());
 
             // Now, iterate over the runners to see if their chances of winning covers the random race outcome.
-            Decimal cumulativeChances = 0M;
+            Decimal  cumulativeChances = 0M;
             foreach(var runnerChances in runnersAndNormalizedRandomizedChances.OrderBy(r => r.Chances))
             {
                 Decimal runnerMinChance = cumulativeChances;
