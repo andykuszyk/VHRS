@@ -70,19 +70,20 @@ namespace VHRS.WinForm
             // Create controls and add to this form.
             _runnerGrid = CreateRunnersGrid();
             _runnerGrid.SelectionChanged += RunnerGrid_SelectionChanged;
-            _addRunner = CreateButton(662, 12, "addRunner", Language.AddRunner);
+            _addRunner = CreateButton(12, 404, "addRunner", Language.AddRunner);
             _addRunner.Click += AddRunner_Click;
-            _removeRunner = CreateButton(662, 37, "removeRunner", Language.RemoveRunner);
+            _removeRunner = CreateButton(124,404, "removeRunner", Language.RemoveRunner);
             _removeRunner.Click += RemoveRunner_Click;
-            _runRace = CreateButton(662, 60, "runRace", Language.RunRace);
+            _runRace = CreateButton(236, 404, "runRace", Language.RunRace);
             _runRace.Click += RunRace_Click;
-            _raceMargin = CreateLabel(662, 83, "raceMargin", Language.RaceMargin);
+            _raceMargin = CreateLabel(348, 406, "raceMargin", Language.RaceMargin);
             Controls.AddRange(new Control[] { _runnerGrid, _addRunner, _removeRunner, _runRace, _raceMargin });
 
-            ClientSize = new System.Drawing.Size(784, 562);
+            ClientSize = new System.Drawing.Size(624, 434);
             Name = "Main";
             Text = Language.Main_Text;
-
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             ResumeLayout(false);
         }
 
@@ -130,7 +131,7 @@ namespace VHRS.WinForm
             Button button = new Button();
             button.Location = new System.Drawing.Point(x, y);
             button.Name = name;
-            button.Size = new System.Drawing.Size(75, 23);
+            button.Size = new System.Drawing.Size(110, 23);
             button.TabIndex = 2;
             button.Text = text;
             button.UseVisualStyleBackColor = true;
@@ -182,7 +183,7 @@ namespace VHRS.WinForm
             });
             grid.Location = new System.Drawing.Point(12, 12);
             grid.Name = "runnerGrid";
-            grid.Size = new System.Drawing.Size(623, 525);
+            grid.Size = new System.Drawing.Size(600, 388);
             grid.TabIndex = 0;
             grid.AllowUserToAddRows = true;
             grid.AllowUserToDeleteRows = true;
