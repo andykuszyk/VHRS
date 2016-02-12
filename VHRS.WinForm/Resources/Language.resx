@@ -138,4 +138,7 @@
   <data name="RunRace" xml:space="preserve">
     <value>Run Race</value>
   </data>
+  <data name="RaceMargin" xml:space="preserve">
+    <value>Race Margin: {0}%</value>
+  </data>
 </root>

@@ -19,11 +19,9 @@ namespace VHRS.WinForm
 
         private DataGridView _runnerGrid;
         private Button _addRunner;
-        private ToolTip _addRunnerTooltip;
         private Button _removeRunner;
-        private ToolTip _removeRunnerTooltip;
         private Button _runRace;
-        private ToolTip _runRaceTooltip;
+        private Label _raceMargin;
 
         #endregion
 
@@ -58,6 +56,10 @@ namespace VHRS.WinForm
                 case nameof(ViewModel.CanRunRace):
                     _runRace.Enabled = ViewModel.CanRunRace;
                     break;
+
+                case nameof(ViewModel.RaceMargin):
+                    _raceMargin.Text = String.Format(Language.RaceMargin, ViewModel.RaceMargin * 100);
+                    break;
             }
         }
 
@@ -69,15 +71,13 @@ namespace VHRS.WinForm
             _runnerGrid = CreateRunnersGrid();
             _runnerGrid.SelectionChanged += RunnerGrid_SelectionChanged;
             _addRunner = CreateButton(662, 12, "addRunner", Language.AddRunner);
-            _addRunnerTooltip = CreateToolTip(_addRunner);
             _addRunner.Click += AddRunner_Click;
             _removeRunner = CreateButton(662, 37, "removeRunner", Language.RemoveRunner);
-            _removeRunnerTooltip = CreateToolTip(_removeRunner);
             _removeRunner.Click += RemoveRunner_Click;
             _runRace = CreateButton(662, 60, "runRace", Language.RunRace);
-            _runRaceTooltip = CreateToolTip(_runRace);
             _runRace.Click += RunRace_Click;
-            Controls.AddRange(new Control[] { _runnerGrid, _addRunner, _removeRunner, _runRace });
+            _raceMargin = CreateLabel(662, 83, "raceMargin", Language.RaceMargin);
+            Controls.AddRange(new Control[] { _runnerGrid, _addRunner, _removeRunner, _runRace, _raceMargin });
 
             ClientSize = new System.Drawing.Size(784, 562);
             Name = "Main";
@@ -137,6 +137,15 @@ namespace VHRS.WinForm
             return button;
         }
 
+        private Label CreateLabel(Int32 x, Int32 y, String name, String text)
+        {
+            Label label = new Label();
+            label.Location = new Point(x, y);
+            label.Name = name;
+            label.Text = text;
+            return label;
+        }
+
         /// <summary>
         /// Creates a generic data grid column with the given parameters.
         /// </summary>
@@ -170,7 +179,7 @@ namespace VHRS.WinForm
                 CreateDataGridColumn(Language.RunnerGrid_Name, "runnerGridNameCol", Runner.NameProperty),
                 CreateDataGridColumn(Language.RunnerGrid_Odds, "runnerGridOddsCol", Runner.OddsProperty),
             });
-            grid.Location = new System.Drawing.Point(12, 19);
+            grid.Location = new System.Drawing.Point(12, 12);
             grid.Name = "runnerGrid";
             grid.Size = new System.Drawing.Size(623, 525);
             grid.TabIndex = 0;

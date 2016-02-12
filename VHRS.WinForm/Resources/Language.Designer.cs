@@ -79,6 +79,15 @@ namespace VHRS.WinForm.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Race Margin: {0}%.
+        /// </summary>
+        internal static string RaceMargin {
+            get {
+                return ResourceManager.GetString("RaceMargin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The winner of the race is: {0}..
         /// </summary>
         internal static string RaceWinner {

@@ -110,5 +110,16 @@ namespace VHRS.Tests.Model
 
             error.Should().NotBeEmpty($"because {odds} does not contain a forward slash");
         }
+
+        [Test]
+        public void GetMargin_CalculatesMarginCorrectly()
+        {
+            var runner = new Runner("Name", "1/2");
+            Decimal expectedMargin = 100 / (1m / 2m + 1);
+
+            Decimal margin = runner.GetMargin();
+
+            margin.Should().Be(expectedMargin);
+        }
     }
 }

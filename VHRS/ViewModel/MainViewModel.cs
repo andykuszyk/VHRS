@@ -85,6 +85,11 @@ namespace VHRS.ViewModel
         /// </summary>
         public Boolean CanRunRace { get { return _canRunRace; } }
 
+        /// <summary>
+        /// The margin of the race if it was run now.
+        /// </summary>
+        public Decimal RaceMargin { get { return _raceMargin; } }
+
         #endregion
 
         #region Constructors
@@ -141,6 +146,7 @@ namespace VHRS.ViewModel
         private void ReCalculateRaceMargin()
         {
             _raceMargin = Math.Round(Runners.Sum(r => r.GetMargin()), 2);
+            OnPropertyChanged(nameof(RaceMargin));
             EvaluateCanRunRace();
         }
 
