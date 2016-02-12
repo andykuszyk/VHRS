@@ -183,7 +183,9 @@ namespace VHRS.ViewModel
 
             // Re-normalize the chances so that they stack up to 100%.
             Decimal totalRandomizedChances = runnersAndRanomizedChances.Sum(r => r.Chances);
-            var runnersAndNormalizedRandomizedChances = runnersAndRanomizedChances.Select(r => new { Runner = r.Runner, Chances = r.Chances / totalRandomizedChances });
+            var runnersAndNormalizedRandomizedChances = runnersAndRanomizedChances
+                .Select(r => new { Runner = r.Runner, Chances = r.Chances / totalRandomizedChances })
+                .ToList();
 
             // Calculate a random outcome for the race.
             Decimal raceOutcome = Convert.ToDecimal(_random.NextDouble());
@@ -212,9 +214,10 @@ namespace VHRS.ViewModel
                 cumulativeChances += runnerChances.Chances;
             }
 
-            // A winner should always be found, so this point should never be reached.
-            Debug.Fail($"A winner should always be found by {nameof(RunRace)}");
-            return null;
+            // If we reach this point, its likely that the runnerMaxChance was still less than
+            // the race outcome due to accuracy issues. If this is the case, then last runner
+            // would have been the winner.
+            return runnersAndNormalizedRandomizedChances.OrderBy(r => r.Chances).Last().Runner;
         }
 
         /// <summary>
