@@ -154,23 +154,23 @@ namespace VHRS.Model
 
             if (!Regex.IsMatch(Odds, numeratorPattern) || !Regex.IsMatch(Odds, denominatorPattern)) return 0;
 
-            Int32 numerator;
-            Int32 denominator;
+            Decimal numerator;
+            Decimal denominator;
             try
             {
                 Match numeratorMatch = Regex.Match(Odds, numeratorPattern);
                 if (numeratorMatch.Groups.Count == 1) return 0;
-                numerator = Convert.ToInt32(numeratorMatch.Groups[1]);
+                numerator = Convert.ToInt32(numeratorMatch.Groups[1].ToString());
 
                 Match denominatorMatch = Regex.Match(Odds, denominatorPattern);
                 if (denominatorMatch.Groups.Count == 1) return 0;
-                denominator = Convert.ToInt32(denominatorMatch.Groups[1]);
+                denominator = Convert.ToInt32(denominatorMatch.Groups[1].ToString());
             }
-            catch (InvalidCastException)
+            catch (InvalidCastException ex)
             {
                 return 0;
             }
-            catch (FormatException)
+            catch (FormatException ex)
             {
                 return 0;
             }

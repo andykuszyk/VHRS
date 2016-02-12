@@ -58,7 +58,7 @@ namespace VHRS.WinForm
                     break;
 
                 case nameof(ViewModel.RaceMargin):
-                    _raceMargin.Text = String.Format(Language.RaceMargin, ViewModel.RaceMargin * 100);
+                    _raceMargin.Text = String.Format(Language.RaceMargin, ViewModel.RaceMargin);
                     break;
             }
         }
