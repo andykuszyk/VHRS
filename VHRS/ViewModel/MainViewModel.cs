@@ -24,12 +24,12 @@ namespace VHRS.ViewModel
         /// <summary>
         /// The minimum margin, below which races cannot be run.
         /// </summary>
-        private const Decimal _minRaceMargin = 1.1M;
+        private const Decimal _minRaceMargin = 110M;
 
         /// <summary>
         /// The maximum margin, above which races cannot be run.
         /// </summary>
-        private const Decimal _maxRaceMargin = 1.4M;
+        private const Decimal _maxRaceMargin = 140M;
 
         /// <summary>
         /// The margin by which chances can vary in <see cref="RunRace"/>.

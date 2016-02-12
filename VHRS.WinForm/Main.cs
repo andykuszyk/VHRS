@@ -97,7 +97,7 @@ namespace VHRS.WinForm
         {
             Runner winner = ViewModel.RunRace();
             if (winner == null) return;
-            MessageBox.Show(String.Format(Language.RaceWinner,winner));
+            MessageBox.Show(String.Format(Language.RaceWinner,winner.Name));
         }
 
         private void RemoveRunner_Click(Object sender, EventArgs e)
@@ -143,6 +143,7 @@ namespace VHRS.WinForm
             label.Location = new Point(x, y);
             label.Name = name;
             label.Text = text;
+            label.Width = 200;
             return label;
         }
 
