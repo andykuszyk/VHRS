@@ -16,6 +16,7 @@ namespace VHRS.Tests.ViewModel
         public void RunRace_RunnerShouldWinWithin2PointsOfProbability()
         {
             var viewModel = new MainViewModel();
+            viewModel.Runners.Clear();
             for (Int32 i = 0; i < 4; i++) viewModel.AddRunner();
             viewModel.Runners[0].Name = "Runner One";
             viewModel.Runners[0].Odds = "1/2";
