@@ -119,38 +119,7 @@ namespace VHRS.ViewModel
         /// </summary>
         private void ReCalculateRaceMargin()
         {
-            Single raceMargin = 0f;
-            String numeratorPattern = "^([0-9]+)/";
-            String denominatorPattern = "/([0-9]+)";
-            foreach (Runner runner in Runners)
-            {
-                if (!Regex.IsMatch(runner.Odds, numeratorPattern) || !Regex.IsMatch(runner.Odds, denominatorPattern)) continue;
-
-                Int32 numerator;
-                Int32 denominator;
-                try
-                {
-                    Match numeratorMatch = Regex.Match(runner.Odds, numeratorPattern);
-                    if (numeratorMatch.Groups.Count == 1) continue;
-                    numerator = Convert.ToInt32(numeratorMatch.Groups[1]);
-
-                    Match denominatorMatch = Regex.Match(runner.Odds, denominatorPattern);
-                    if (denominatorMatch.Groups.Count == 1) continue;
-                    denominator = Convert.ToInt32(denominatorMatch.Groups[1]);
-                }
-                catch(InvalidCastException)
-                {
-                    continue;
-                }
-                catch(FormatException)
-                {
-                    continue;
-                }
-
-                raceMargin += 100 / ((numerator / denominator) + 1);
-            }
-
-            _raceMargin = Convert.ToSingle(Math.Round(raceMargin, 2));
+            _raceMargin = Convert.ToSingle(Math.Round(Runners.Sum(r => r.GetMargin()), 2));
             EvaluateCanRunRace();
         }
 

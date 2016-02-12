@@ -144,6 +144,41 @@ namespace VHRS.Model
         #region Methods
 
         /// <summary>
+        /// Calculates the race margin for this <see cref="Runner"/>.
+        /// </summary>
+        /// <returns></returns>
+        public Single GetMargin()
+        {
+            String numeratorPattern = "^([0-9]+)/";
+            String denominatorPattern = "/([0-9]+)";
+
+            if (!Regex.IsMatch(Odds, numeratorPattern) || !Regex.IsMatch(Odds, denominatorPattern)) return 0;
+
+            Int32 numerator;
+            Int32 denominator;
+            try
+            {
+                Match numeratorMatch = Regex.Match(Odds, numeratorPattern);
+                if (numeratorMatch.Groups.Count == 1) return 0;
+                numerator = Convert.ToInt32(numeratorMatch.Groups[1]);
+
+                Match denominatorMatch = Regex.Match(Odds, denominatorPattern);
+                if (denominatorMatch.Groups.Count == 1) return 0;
+                denominator = Convert.ToInt32(denominatorMatch.Groups[1]);
+            }
+            catch (InvalidCastException)
+            {
+                return 0;
+            }
+            catch (FormatException)
+            {
+                return 0;
+            }
+
+            return 100 / ((numerator / denominator) + 1);
+        }
+
+        /// <summary>
         /// Returns an error message describing the validation error with the <see cref="Name"/>
         /// property, or null if <see cref="Name"/> is valid.
         /// </summary>
